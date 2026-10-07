@@ -1,0 +1,24 @@
+experiment_id: local-smoke
+backend: mock
+policy: selective
+allocated_gpus: 0
+duration_s: 2
+drain_s: 2
+rate: 10
+workload: W1
+tiny_mock: true
+seed: 101
+max_inflight: 32
+client_concurrency: 64
+geometry: {layers: 2, kv_heads: 2, head_dim: 16, bytes_per_element: 2, max_context: 32768}
+workers:
+  - {worker_id: mock-a, allocation_id: local, node_id: mac, gpu_uuid: none-a, gpu_type: mock, model_revision: mock-v1, cache_signature: mock-v1, cache_blocks: 4096, roles: [colocated, prefill, decode]}
+  - {worker_id: mock-b, allocation_id: local, node_id: mac, gpu_uuid: none-b, gpu_type: mock, model_revision: mock-v1, cache_signature: mock-v1, cache_blocks: 4096, roles: [colocated, prefill, decode]}
+profiles:
+  - {worker_id: mock-a, prompt_grid: [1, 32768], prefill_ms: [5, 5], context_grid: [1, 32768], decode_ms: [1, 1], queue_ms_per_token: 0.001}
+  - {worker_id: mock-b, prompt_grid: [1, 32768], prefill_ms: [5, 5], context_grid: [1, 32768], decode_ms: [1, 1], queue_ms_per_token: 0.001}
+links:
+  - {source: mock-a, destination: mock-b, profile: {setup_ms: 2, bytes_per_second: 1000000000, first_token: decode}}
+  - {source: mock-b, destination: mock-a, profile: {setup_ms: 2, bytes_per_second: 1000000000, first_token: decode}}
+mock: {prefill_s: 0.005, token_s: 0.001, transfer_s: 0.002}
+

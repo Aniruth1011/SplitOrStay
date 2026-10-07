@@ -1,0 +1,23 @@
+backend: vllm
+experiment_id: E0
+model: Qwen/Qwen2.5-1.5B-Instruct
+model_revision: null
+tokenizer_revision: null
+mode: controlled
+policy: colocated
+allocated_gpus: 1
+gpu_inventory: []
+duration_s: 60
+drain_s: 120
+rate: 0.1
+workload: W0
+seed: 101
+telemetry_file: results/worker-health.local.json
+# Fill geometry from the pinned model config, cache_blocks from a measured conservative
+# engine budget, workers from actual allocation identity, profiles from measurements.
+geometry: null
+workers: []
+profiles: []
+profile_evidence_kind: null
+profile_run_ids: []
+links: []

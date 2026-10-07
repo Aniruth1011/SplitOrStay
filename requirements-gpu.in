@@ -1,0 +1,4 @@
+# Candidate remote-only dependency. NOT a tested complete CUDA/transport lock.
+# Resolve in the remote Linux/Python 3.12 environment, save exact resolved dependencies
+# and container digest, then pass single-GPU and connector tests before accepting.
+vllm==0.28.0

@@ -1,0 +1,14 @@
+.venv/
+.venv-gpu/
+.uv-cache/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.DS_Store
+results/runs/
+results/summaries/
+results/figures/
+datasets/raw/
+datasets/prepared/
+*.local.yaml

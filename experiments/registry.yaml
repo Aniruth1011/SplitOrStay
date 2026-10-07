@@ -1,0 +1,20 @@
+schema_version: 1
+screening_budget_gpu_hours: 20
+controls: [model_revision, tokenizer_revision, GPU_pool, trace_hash, SLOs, numeric_load, engine_settings]
+validation_seeds: [101, 102, 103]
+held_out_seeds: [201, 202, 203, 204, 205]
+selection: validation-only constrained geometric-mean compliant token goodput; simpler if uncertain within 3 percent
+experiments:
+  - {id: local-smoke, status: PLANNED, hypothesis: CPU orchestration reconciles all outcomes without reservation leaks, comparator: known timing fixtures, primary_metric: reconciliation, pass: zero missing outcomes and reservations, evidence: mock-only}
+  - {id: E0, status: PLANNED, hypothesis: pinned hardware supports correct streamed handoff, comparator: colocated greedy continuation, primary_metric: token agreement, pass: investigate every mismatch across at least 1000 cases}
+  - {id: E1, status: PLANNED, hypothesis: chunked-prefill tuning improves the baseline, comparator: default colocation, primary_metric: offered compliant token goodput, pass: strongest feasible validation baseline retained}
+  - {id: E2, status: PLANNED, hypothesis: static PD has a topology-dependent crossover, comparator: tuned colocation, primary_metric: goodput, pass: report both orientations and losing cells}
+  - {id: E3, status: PLANNED, hypothesis: transfer-aware selection improves challenge cells, comparator: B0-B5, primary_metric: goodput ratio, pass: paired lower CI above 1 and control regression at most 5 percent}
+  - {id: E4, status: PLANNED, hypothesis: learned predictors help routing, comparator: lookup, primary_metric: validation scheduling goodput, pass: grouped prediction checks plus scheduling improvement}
+  - {id: E5, status: PLANNED, hypothesis: a benefit guard avoids unnecessary transfers, comparator: zero margin, primary_metric: goodput, pass: validate margins 0 10 20 30 percent}
+  - {id: E6, status: PLANNED, hypothesis: gains survive engine tuning, comparator: equally tuned baselines, primary_metric: goodput, pass: matched budgets}
+  - {id: E7, status: PLANNED, hypothesis: full-growth reservations prevent over-admission, comparator: safe headroom variants, primary_metric: controller-induced OOM, pass: zero OOM and leaked reservations}
+  - {id: E8, status: PLANNED, hypothesis: uncertainty guards help under estimation error, comparator: unguarded, primary_metric: goodput, pass: include stale telemetry and length perturbations}
+  - {id: E9, status: PLANNED, hypothesis: individual components explain gains, comparator: frozen full policy, primary_metric: paired goodput difference, pass: one component at a time and memory safety always enabled}
+  - {id: E10, status: PLANNED, hypothesis: frozen selection generalizes, comparator: strongest frozen feasible baseline, primary_metric: held-out goodput, pass: at least five paired repetitions and all losses reported}
+  - {id: E11, status: PLANNED, hypothesis: optional capabilities add value, comparator: core policy, primary_metric: extension-specific, pass: independent capability gate before experiment}

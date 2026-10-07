@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "heterokv"
+version = "0.1.0"
+description = "Transfer-aware serving research controller and honest benchmark tooling"
+requires-python = ">=3.11,<3.15"
+dependencies = ["fastapi>=0.115,<1", "httpx>=0.28,<1", "uvicorn>=0.34,<1", "pydantic>=2.10,<3", "PyYAML>=6,<7", "pyarrow>=19", "numpy>=2", "matplotlib>=3.10"]
+
+[project.optional-dependencies]
+predictors = ["scikit-learn>=1.6", "xgboost>=3"]
+tokenizer = ["transformers>=4.51,<6"]
+telemetry = ["nvidia-ml-py>=12"]
+
+[dependency-groups]
+dev = ["pytest>=8", "pytest-asyncio>=0.25", "ruff>=0.11"]
+
+[project.scripts]
+heterokv = "heterokv.cli:main"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = ["gpu: requires allocated NVIDIA GPUs and pinned serving stack"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]

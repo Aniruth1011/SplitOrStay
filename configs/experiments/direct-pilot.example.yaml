@@ -1,0 +1,27 @@
+# Copy to direct-pilot.local.yaml and fill values from the actual Slurm allocation.
+# This is a real streamed colocated pilot before phase profiles exist.
+experiment_id: E0-direct-colocated-pilot
+backend: vllm-direct
+policy: direct
+model: Qwen/Qwen2.5-1.5B-Instruct
+model_revision: null  # immutable 40-character Hugging Face commit
+tokenizer_revision: null  # same commit for this model
+endpoint: http://127.0.0.1:8000
+mode: controlled
+allocated_gpus: 1
+gpu_inventory: []  # actual allocated GPU UUID/type/VRAM; inspect within job
+duration_s: 60
+drain_s: 120
+rate: 0.05
+workload: W0
+seed: 101
+client_concurrency: 64
+timeout_s: 120
+engine_settings:
+  chunked_prefill: true
+  prefix_cache: false
+  tensor_parallel_size: 1
+  max_model_len: 4096
+  max_num_batched_tokens: 4096
+  max_num_seqs: 8
+  stream_interval: 1

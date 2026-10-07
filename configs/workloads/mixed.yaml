@@ -1,0 +1,6 @@
+workload: W1
+duration_s: 180
+rate: 1
+timeout_s: 120
+# Planning values. Freeze identical numeric rates after the remote pilot.
+

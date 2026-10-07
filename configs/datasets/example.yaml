@@ -1,0 +1,20 @@
+dataset_id: example
+source: datasets/raw/pinned.csv
+sha256: REPLACE_WITH_SHA256
+source_url: REPLACE_WITH_IMMUTABLE_SOURCE
+license: VERIFY_RELEASE_LICENSE
+out: datasets/prepared/example-v1
+columns: {timestamp: timestamp, prompt: context_tokens, output: generated_tokens}
+timestamp_seconds_per_unit: 1
+speedup: 1
+mode: natural
+output_cap: 1024
+max_context: 32768
+ttft_slo_ms: 1500
+tpot_slo_ms: 50
+seed: 101
+windows:
+  - {id: development, split: development, start: 0, end: 600}
+  - {id: validation, split: validation, start: 600, end: 1200}
+# Timestamp units and windows above illustrate the schema; inspect the actual release.
+

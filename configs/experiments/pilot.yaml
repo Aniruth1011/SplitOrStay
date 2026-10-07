@@ -1,0 +1,9 @@
+backend: vllm
+model: Qwen/Qwen2.5-1.5B-Instruct
+model_revision: null
+tokenizer_revision: null
+allocated_gpus: 1
+gpu_inventory: []
+profiles: []
+# This deliberately fails doctor until the remote allocation and immutable model revision are known.
+

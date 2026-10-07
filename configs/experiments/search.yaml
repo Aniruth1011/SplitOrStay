@@ -1,0 +1,11 @@
+experiment_id: local-policy-plumbing
+stage: validation
+base_config: configs/experiments/local.yaml
+seeds: [101, 102]
+order_seed: 42
+out: results/local-policy-plumbing
+candidates:
+  - {policy: round_robin}
+  - {policy: token_work}
+  - {policy: selective}
+# Mock timings are fixed fixtures, not a performance model for choosing policies.

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "datasets": [
+    {"id": "azure2023", "status": "PLANNED", "role": "development-validation", "source": "https://github.com/Azure/AzurePublicDataset/blob/master/AzureLLMInferenceDataset2023.md"},
+    {"id": "burstgpt", "status": "PLANNED", "role": "validation-disjoint-confirmation", "source": "https://github.com/HPMLL/BurstGPT"},
+    {"id": "azure2024", "status": "PLANNED", "role": "external-held-out-after-freeze", "source": "https://github.com/Azure/AzurePublicDataset/blob/master/AzureLLMInferenceDataset2024.md"}
+  ]
+}
+
